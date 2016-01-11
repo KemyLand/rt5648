@@ -19,6 +19,7 @@
 #include <linux/spi/spi.h>
 #include <linux/acpi.h>
 #include <linux/mod_devicetable.h>
+#include <linux/printk.h>
 #include <sound/core.h>
 #include <sound/pcm.h>
 #include <sound/pcm_params.h>
@@ -3347,6 +3348,7 @@ MODULE_DEVICE_TABLE(acpi, rt5648_acpi_id);
 static int rt5648_i2c_probe(struct i2c_client *i2c,
 		    const struct i2c_device_id *id)
 {
+	pr_debug("rt5648_i2c_probe() called: i2c->name=%s id->name=%s\n", i2c->name, id->name);
 	struct rt5648_priv *rt5648;
 	int ret;
 
@@ -3358,26 +3360,34 @@ static int rt5648_i2c_probe(struct i2c_client *i2c,
 
 	ret = snd_soc_register_codec(&i2c->dev, &soc_codec_dev_rt5648,
 			rt5648_dai, ARRAY_SIZE(rt5648_dai));
+	pr_debug("snd_soc_register_codec returned %d\n", ret);
 	if (ret < 0)
 		kfree(rt5648);
 
+	pr_debug("rt5648_i2c_probe() returned: %d\n", ret);
 	return ret;
 }
 
 static int rt5648_i2c_remove(struct i2c_client *i2c)
 {
+	pr_debug("rt5648_i2c_remove() called: i2c->name=%s\n", i2c->name);
 	snd_soc_unregister_codec(&i2c->dev);
 	kfree(i2c_get_clientdata(i2c));
+	pr_debug("rt5648_i2c_remove() returned: 0\n");
 	return 0;
 }
 
 void rt5648_i2c_shutdown(struct i2c_client *client)
 {
+	pr_debug("rt5648_i2c_shutdown() called: client->name=%s\n", client->name);
 	struct rt5648_priv *rt5648 = i2c_get_clientdata(client);
 	struct snd_soc_codec *codec = rt5648->codec;
 
+	pr_debug("codec=%p", codec);
 	if (codec != NULL)
 		rt5648_set_bias_level(codec, SND_SOC_BIAS_OFF);
+
+	pr_debug("rt5648_i2c_shutdown() returned\n");
 }
 
 struct i2c_driver rt5648_i2c_driver = {
@@ -3395,13 +3405,17 @@ struct i2c_driver rt5648_i2c_driver = {
 
 static int __init rt5648_modinit(void)
 {
+	pr_debug("Initializing RT5648 driver\n");
 	return i2c_add_driver(&rt5648_i2c_driver);
+	pr_debug("Initialized RT5648 driver\n");
 }
 module_init(rt5648_modinit);
 
 static void __exit rt5648_modexit(void)
 {
+	pr_debug("Finalizing RT5648 driver\n");
 	i2c_del_driver(&rt5648_i2c_driver);
+	pr_debug("Finalized RT5648 driver\n");
 }
 module_exit(rt5648_modexit);
 
