@@ -3384,6 +3384,8 @@ struct i2c_driver rt5648_i2c_driver = {
 	.driver = {
 		.name = "rt5648",
 		.owner = THIS_MODULE,
+		.acpi_match_table = ACPI_PTR(rt5648_acpi_id),
+		.probe_type = PROBE_PREFER_ASYNCHRONOUS,
 	},
 	.probe = rt5648_i2c_probe,
 	.remove = rt5648_i2c_remove,
