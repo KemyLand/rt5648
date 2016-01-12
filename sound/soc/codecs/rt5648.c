@@ -3323,12 +3323,19 @@ static struct snd_soc_codec_driver soc_codec_dev_rt5648 = {
 	.suspend = rt5648_suspend,
 	.resume = rt5648_resume,
 	.set_bias_level = rt5648_set_bias_level,
-	.reg_cache_size = RT5648_VENDOR_ID2 + 1,
-	.reg_word_size = sizeof(u16),
-	.reg_cache_default = rt5648_reg,
-	//.volatile_register = rt5648_volatile_register,
-	//.readable_register = rt5648_readable_register,
-	.reg_cache_step = 1,
+	.idle_bias_off = true,
+	.controls = rt5648_snd_controls,
+	.num_controls = ARRAY_SIZE(rt5648_snd_controls),
+	.dapm_widgets = rt5648_dapm_widgets,
+	.num_dapm_widgets = ARRAY_SIZE(rt5648_dapm_widgets),
+	.dapm_routes = rt5648_dapm_routes,
+	.num_dapm_routes = ARRAY_SIZE(rt5648_dapm_routes),
+	/*.reg_cache_size = RT5648_VENDOR_ID2 + 1,
+	 *.reg_word_size = sizeof(u16),
+	 *.reg_cache_default = rt5648_reg,
+	 *.volatile_register = rt5648_volatile_register,
+	 *.readable_register = rt5648_readable_register,
+	 *.reg_cache_step = 1,*/
 };
 
 static const struct i2c_device_id rt5648_i2c_id[] = {
