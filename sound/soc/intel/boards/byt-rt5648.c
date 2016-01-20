@@ -200,7 +200,7 @@ static struct snd_soc_dai_link byt_rt5648_dais[] = {
 };
 
 static struct snd_soc_card byt_rt5648_card = {
-	.name = "byt-rt5648",
+	.name = "8086F028:00", // was "byt-rt5648"
 	.owner = THIS_MODULE,
 	.dai_link = byt_rt5648_dais,
 	.num_links = ARRAY_SIZE(byt_rt5648_dais),
@@ -217,6 +217,7 @@ static int byt_rt5648_probe(struct platform_device *pdev)
 	struct snd_soc_card *card = &byt_rt5648_card;
 
 	card->dev = &pdev->dev;
+	pr_debug("byt_rt5648_probe(): calling devm_snd_soc_register_card(\"%s\", \"%s\")\n", pdev->dev.init_name, card->name);
 	int ret = devm_snd_soc_register_card(&pdev->dev, card);
 	pr_debug("byt_rt5648_probe() returned: %d\n", ret);
 	return ret;
