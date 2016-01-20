@@ -12,6 +12,7 @@
  * more details.
  */
 
+#define DEBUG 1
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/platform_device.h>
@@ -211,10 +212,13 @@ static struct snd_soc_card byt_rt5648_card = {
 
 static int byt_rt5648_probe(struct platform_device *pdev)
 {
+	pr_debug("byt_rt5648_probe() called: pdev->name=%s\n", pdev->name);
 	struct snd_soc_card *card = &byt_rt5648_card;
 
 	card->dev = &pdev->dev;
-	return devm_snd_soc_register_card(&pdev->dev, card);
+	int ret = devm_snd_soc_register_card(&pdev->dev, card);
+	pr_debug("byt_rt5648_probe() returned: %d\n", ret);
+	return ret;
 }
 
 static struct platform_driver byt_rt5648_audio = {
