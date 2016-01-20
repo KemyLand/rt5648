@@ -211,9 +211,31 @@ static struct snd_soc_card byt_rt5648_card = {
 	.fully_routed = true,
 };
 
+static void dump_device(struct device *dev) {
+	pr_debug(
+		"dump_device: *dev = {\n"
+		"\tstruct device_private *p = %p\n"
+		"\tconst char *init_name = \"%s\"\n}\n",
+		dev->p, dev->init_name);
+
+	if(dev->parent != NULL) {
+		pr_debug("dump_device(): Beginning recursive dump of dev->parent\n");
+		dump_device(dev->parent);
+	}
+}
+
 static int byt_rt5648_probe(struct platform_device *pdev)
 {
 	pr_debug("byt_rt5648_probe() called: pdev->name=%s\n", pdev->name);
+	pr_debug(
+		"byt_rt5648_probe(): *pdev = {\n"
+		"\tconst char *name = \"%s\"\n"
+		"\tint id = %d\n"
+		"\tbool id_auto = %d\n"
+		"\tu32 num_resources = %u\n}\n",
+		pdev->name, pdev->id, pdev->id_auto, pdev->num_resources);
+	pr_debug("byt_rt5648_probe(): Beginning recursive dump of pdev->dev\n");
+	dump_device(&pdev->dev);
 	struct snd_soc_card *card = &byt_rt5648_card;
 
 	card->dev = &pdev->dev;
