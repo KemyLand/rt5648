@@ -165,11 +165,12 @@ static int byt_rt5648_init(struct snd_soc_pcm_runtime *runtime)
 	if (ret)
 		return ret;
 
+    /*TODO: Fix whatever crap this was
 	if (byt_rt5648_quirk & BYT_RT5648_DMIC_EN) {
 		ret = rt5648_dmic_enable(codec, 0, 0);
 		if (ret)
 			return ret;
-	}
+	}*/
 
 	snd_soc_dapm_ignore_suspend(&card->dapm, "Headphone");
 	snd_soc_dapm_ignore_suspend(&card->dapm, "Speaker");
