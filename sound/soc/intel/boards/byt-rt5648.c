@@ -20,6 +20,7 @@
 #include <linux/device.h>
 #include <linux/dmi.h>
 #include <linux/slab.h>
+#include <linux/printk.h>
 #include <sound/pcm.h>
 #include <sound/pcm_params.h>
 #include <sound/soc.h>
@@ -221,10 +222,11 @@ static int byt_rt5648_probe(struct platform_device *pdev)
 	return ret;
 }
 
+// ACPI 80860F28 is holy!
 static struct platform_driver byt_rt5648_audio = {
 	.probe = byt_rt5648_probe,
 	.driver = {
-		.name = "byt-rt5648",
+		.name = "80860F28:00", // was "byt-rt5648"
 		.pm = &snd_soc_pm_ops,
 	},
 };
