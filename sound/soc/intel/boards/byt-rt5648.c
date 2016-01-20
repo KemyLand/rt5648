@@ -245,7 +245,15 @@ static int byt_rt5648_probe(struct platform_device *pdev)
 	return ret;
 }
 
-// ACPI 80860F28 is holy!
+
+#ifdef CONFIG_ACPI
+static const struct acpi_device_id byt_rt5648_acpi_id[] = {
+	{ "80860F28" },
+	{ }
+};
+MODULE_DEVICE_TABLE(acpi, byt_rt5648_acpi_id);
+#endif
+
 static struct platform_driver byt_rt5648_audio = {
 	.probe = byt_rt5648_probe,
 	.driver = {
@@ -253,6 +261,7 @@ static struct platform_driver byt_rt5648_audio = {
 		.pm = &snd_soc_pm_ops,
 	},
 };
+
 module_platform_driver(byt_rt5648_audio)
 
 MODULE_DESCRIPTION("ASoC Intel(R) Baytrail Machine driver");
