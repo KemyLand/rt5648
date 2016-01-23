@@ -8,6 +8,7 @@ snd-soc-sst-cht-bsw-rt5645-objs := cht_bsw_rt5645.o
 snd-soc-sst-cht-bsw-max98090_ti-objs := cht_bsw_max98090_ti.o
 snd-soc-skl_rt286-objs := skl_rt286.o
 snd-soc-sst-byt-rt5648-mach-objs := byt-rt5648.o
+snd-soc-sst-bytcr-rt5648-objs := bytcr_rt5648.o
 
 obj-$(CONFIG_SND_SOC_INTEL_HASWELL_MACH) += snd-soc-sst-haswell.o
 obj-$(CONFIG_SND_SOC_INTEL_BYT_RT5640_MACH) += snd-soc-sst-byt-rt5640-mach.o
@@ -19,3 +20,4 @@ obj-$(CONFIG_SND_SOC_INTEL_CHT_BSW_RT5645_MACH) += snd-soc-sst-cht-bsw-rt5645.o
 obj-$(CONFIG_SND_SOC_INTEL_CHT_BSW_MAX98090_TI_MACH) += snd-soc-sst-cht-bsw-max98090_ti.o
 obj-$(CONFIG_SND_SOC_INTEL_SKL_RT286_MACH) += snd-soc-skl_rt286.o
 obj-$(CONFIG_SND_SOC_INTEL_BYT_RT5648_MACH) += snd-soc-sst-byt-rt5648-mach.o
+obj-$(CONFIG_SND_SOC_INTEL_BYTCR_RT5648_MACH) += snd-soc-sst-bytcr-rt5648.o

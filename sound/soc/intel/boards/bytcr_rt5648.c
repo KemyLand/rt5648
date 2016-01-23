@@ -73,7 +73,7 @@ static int byt_aif1_hw_params(struct snd_pcm_substream *substream,
 
 	snd_soc_dai_set_bclk_ratio(codec_dai, 50);
 
-	ret = snd_soc_dai_set_sysclk(codec_dai, rt5648_SCLK_S_PLL1,
+	ret = snd_soc_dai_set_sysclk(codec_dai, RT5648_SCLK_S_PLL1,
 				     params_rate(params) * 512,
 				     SND_SOC_CLOCK_IN);
 	if (ret < 0) {
@@ -81,7 +81,7 @@ static int byt_aif1_hw_params(struct snd_pcm_substream *substream,
 		return ret;
 	}
 
-	ret = snd_soc_dai_set_pll(codec_dai, 0, rt5648_PLL1_S_BCLK1,
+	ret = snd_soc_dai_set_pll(codec_dai, 0, RT5648_PLL1_S_BCLK1,
 				  params_rate(params) * 50,
 				  params_rate(params) * 512);
 	if (ret < 0) {
@@ -223,6 +223,6 @@ static struct platform_driver snd_byt_mc_driver = {
 module_platform_driver(snd_byt_mc_driver);
 
 MODULE_DESCRIPTION("ASoC Intel(R) Baytrail CR Machine driver");
-MODULE_AUTHOR("Subhransu S. Prusty <subhransu.s.prusty@intel.com>");
+MODULE_AUTHOR("Subhransu S. Prusty <subhransu.s.prusty@intel.com>, Alejandro Soto <alejandrosotochacon@yahoo.es>");
 MODULE_LICENSE("GPL v2");
 MODULE_ALIAS("platform:bytt100_rt5648");
