@@ -31,14 +31,8 @@
 #include <asm/intel-mid.h>
 #include <linux/gpio.h>
 
-#define RTK_IOCTL
-#ifdef RTK_IOCTL
-#if defined(CONFIG_SND_HWDEP) || defined(CONFIG_SND_HWDEP_MODULE)
 #include "rt_codec_ioctl.h"
 #include "rt5648_ioctl.h"
-#endif
-#endif
-
 #include "rt5648.h"
 
 
