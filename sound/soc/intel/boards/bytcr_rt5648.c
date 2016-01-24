@@ -23,6 +23,7 @@
 #include <linux/device.h>
 #include <linux/slab.h>
 #include <linux/input.h>
+#include <linux/acpi.h>
 #include <sound/pcm.h>
 #include <sound/pcm_params.h>
 #include <sound/soc.h>
@@ -212,12 +213,20 @@ static int snd_byt_mc_probe(struct platform_device *pdev)
 	return ret_val;
 }
 
+#ifdef CONFIG_ACPI
+static const struct acpi_device_id snd_byt_mc_acpi_id[] = {
+	{ "80860F28" },
+	{ }
+};
+MODULE_DEVICE_TABLE(acpi, snd_byt_mc_acpi_id);
+#endif
+
 static struct platform_driver snd_byt_mc_driver = {
+	.probe = snd_byt_mc_probe,
 	.driver = {
-		.name = "bytt100_rt5648",
+		.name = "80860F28:00", // was "bytt100_rt5648"
 		.pm = &snd_soc_pm_ops,
 	},
-	.probe = snd_byt_mc_probe,
 };
 
 module_platform_driver(snd_byt_mc_driver);
