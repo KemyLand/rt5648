@@ -215,7 +215,7 @@ static int snd_byt_mc_probe(struct platform_device *pdev)
 
 #ifdef CONFIG_ACPI
 static const struct acpi_device_id snd_byt_mc_acpi_id[] = {
-	{ "80860F28" },
+	{ "10EC5648" },
 	{ }
 };
 MODULE_DEVICE_TABLE(acpi, snd_byt_mc_acpi_id);
@@ -224,7 +224,7 @@ MODULE_DEVICE_TABLE(acpi, snd_byt_mc_acpi_id);
 static struct platform_driver snd_byt_mc_driver = {
 	.probe = snd_byt_mc_probe,
 	.driver = {
-		.name = "80860F28:00", // was "bytt100_rt5648"
+		.name = "10EC5648:00", // was "bytt100_rt5648"
 		.pm = &snd_soc_pm_ops,
 	},
 };

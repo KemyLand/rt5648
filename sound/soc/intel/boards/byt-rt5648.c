@@ -245,19 +245,10 @@ static int byt_rt5648_probe(struct platform_device *pdev)
 	return ret;
 }
 
-
-#ifdef CONFIG_ACPI
-static const struct acpi_device_id byt_rt5648_acpi_id[] = {
-	{ "80860F28" },
-	{ }
-};
-MODULE_DEVICE_TABLE(acpi, byt_rt5648_acpi_id);
-#endif
-
 static struct platform_driver byt_rt5648_audio = {
 	.probe = byt_rt5648_probe,
 	.driver = {
-		.name = "80860F28:00", // was "byt-rt5648"
+		.name = "byt-rt5648",
 		.pm = &snd_soc_pm_ops,
 	},
 };

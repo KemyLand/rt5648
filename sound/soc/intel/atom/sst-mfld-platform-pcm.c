@@ -820,7 +820,8 @@ static const struct dev_pm_ops sst_platform_pm = {
 static struct platform_driver sst_platform_driver = {
 	.driver		= {
 		.name		= "80860F28:00", // was "sst-mfld-platform"
-		.pm             = &sst_platform_pm,
+		.pm         = &sst_platform_pm,
+		.acpi_match_table = ACPI_PTR(sst_platform_acpi_id),
 	},
 	.probe		= sst_platform_probe,
 	.remove		= sst_platform_remove,

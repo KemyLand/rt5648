@@ -3333,18 +3333,10 @@ static struct snd_soc_codec_driver soc_codec_dev_rt5648 = {
 };
 
 static const struct i2c_device_id rt5648_i2c_id[] = {
-	{ "rt5648" },
-	{ }
-};
-MODULE_DEVICE_TABLE(i2c, rt5648_i2c_id);
-
-#ifdef CONFIG_ACPI
-static const struct acpi_device_id rt5648_acpi_id[] = {
 	{ "10EC5648" },
 	{ }
 };
-MODULE_DEVICE_TABLE(acpi, rt5648_acpi_id);
-#endif
+MODULE_DEVICE_TABLE(i2c, rt5648_i2c_id);
 
 static int rt5648_i2c_probe(struct i2c_client *i2c,
 		    const struct i2c_device_id *id)
@@ -3395,8 +3387,6 @@ struct i2c_driver rt5648_i2c_driver = {
 	.driver = {
 		.name = "rt5648",
 		.owner = THIS_MODULE,
-		.acpi_match_table = ACPI_PTR(rt5648_acpi_id),
-		.probe_type = PROBE_PREFER_ASYNCHRONOUS,
 	},
 	.probe = rt5648_i2c_probe,
 	.remove = rt5648_i2c_remove,
